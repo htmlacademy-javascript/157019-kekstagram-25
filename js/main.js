@@ -11,11 +11,11 @@ function getRandomIntInclusive(min, max) {
     return false;
   }
 }
-
+getRandomIntInclusive();
 
 function checkCommentLength(commentLength) {
   if (maxCommentLength >= commentLength) {
     return true;
   } return false;
 }
-
+checkCommentLength();
