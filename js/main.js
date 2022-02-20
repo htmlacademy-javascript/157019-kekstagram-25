@@ -1,5 +1,3 @@
-const maxCommentLength = 140;
-
 // Ссылка на функцию https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
 function getRandomIntInclusive(min, max) {
@@ -8,14 +6,15 @@ function getRandomIntInclusive(min, max) {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   } else {
-    return false;
+    return 0;
   }
 }
 getRandomIntInclusive();
 
-function checkCommentLength(commentLength) {
-  if (maxCommentLength >= commentLength) {
-    return true;
-  } return false;
+function stringLengthCheck(testString, maxLength) {
+  if (testString.length > maxLength) {
+    return false;
+  } return true;
 }
-checkCommentLength();
+
+stringLengthCheck();
