@@ -9,31 +9,31 @@ function getRandomIntInclusive(min, max) {
   } else {
     return 0;
   }
-}
+};
 
-function stringLengthCheck(testString, maxLength) {
+function checkStringLength(testString, maxLength) {
   if (testString.length > maxLength) {
     return false;
   } return true;
-}
+};
 
-const IDS_DISCRIPTION = Array.from({ length: 25 }, (v, k) => ++k);
+const IDS_DISCRIPTIONS = Array.from({ length: 25 }, (v, k) => ++k);
 
 const IDS_COMMENTS = Array.from({ length: 75 }, (v, k) => ++k);
 
-const URL_INDEXES = Array.from({ length: 25 }, (v, k) => ++k);
+const URLS_PHOTOS = Array.from({ length: 25 }, (v, k) => ++k);
 
-const DISCRIPTION = [
+const DISCRIPTIONS = [
   'Фото сделано специалистом, не повторяйте дома.',
   'Боже, да тут фото моей бабушки!               ',
   'Осторожно, 18+                                ',
 ];
 
-const LIKE_INDEXES = Array.from({ length: 185 }, (v, k) => 15+k);
+const LIKES = Array.from({ length: 185 }, (v, k) => 15+k);
 
-const AVATAR_URL_INDEXES = Array.from({ length: 6 }, (v, k) => ++k);
+const URLS_AVATARS = Array.from({ length: 6 }, (v, k) => ++k);
 
-const AUTHOR_NAMES = [
+const NAMES = [
   'Артем',
   'Илья',
   'Вова',
@@ -48,7 +48,7 @@ const AUTHOR_NAMES = [
   'Толя',
 ];
 
-const COMMENT_MESSAGES = [
+const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -58,38 +58,27 @@ const COMMENT_MESSAGES = [
 ];
 
 // Функция для получения уникального значения из массива
-function getUnique(arr) {
-  for (let i = 0; i <= arr.length; i++){
-    return arr.splice(0,1)[i];
+function getUnique(array) {
+  for (let i = 0; i <= array.length; i++){
+    return array.splice(0,1)[i];
   }
 }
 
 const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
-const createPhotoDiscription = () => ({
-  id: getUnique(IDS_DISCRIPTION),
-  url: `photos/${getUnique(URL_INDEXES)}.jpg`,
-  description: getRandomArrayElement(DISCRIPTION),
-  likes: getRandomArrayElement(LIKE_INDEXES),
-  comments: [
-    {
-      id: getUnique(IDS_COMMENTS),
-      avatar: `img/avatar-${getRandomArrayElement(AVATAR_URL_INDEXES)}.svg`,
-      message:getRandomArrayElement(COMMENT_MESSAGES),
-      name: getRandomArrayElement(AUTHOR_NAMES),
-    },
-    {
-      id: getUnique(IDS_COMMENTS),
-      avatar: `img/avatar-${getRandomArrayElement(AVATAR_URL_INDEXES)}.svg`,
-      message:getRandomArrayElement(COMMENT_MESSAGES),
-      name: getRandomArrayElement(AUTHOR_NAMES),
-    },
-    {
-      id: getUnique(IDS_COMMENTS),
-      avatar: `img/avatar-${getRandomArrayElement(AVATAR_URL_INDEXES)}.svg`,
-      message:getRandomArrayElement(COMMENT_MESSAGES),
-      name: getRandomArrayElement(AUTHOR_NAMES),
-    },
-  ],
+const createComments = () => ({
+  id: getUnique(IDS_COMMENTS),
+      avatar: `img/avatar-${getRandomArrayElement(URLS_AVATARS)}.svg`,
+      message:getRandomArrayElement(MESSAGES),
+      name: getRandomArrayElement(NAMES),
 });
-const PhotoDiscription = Array.from({length: 25}, createPhotoDiscription);
+
+const createPhotoDiscription = () => ({
+  id: getUnique(IDS_DISCRIPTIONS),
+  url: `photos/${getUnique(URLS_PHOTOS)}.jpg`,
+  description: getRandomArrayElement(DISCRIPTIONS),
+  likes: getRandomArrayElement(LIKES),
+  comments: Array.from({length: 3}, createComments),
+});
+
+const photoDiscription = Array.from({length: 25}, createPhotoDiscription);
