@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 // Ссылка на функцию https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
@@ -17,7 +17,6 @@ function checkStringLength(testString, maxLength) {
     return false;
   } return true;
 }
-checkStringLength();
 
 const IDS_DISCRIPTIONS = Array.from({ length: 25 }, (v, k) => ++k);
 
@@ -70,9 +69,9 @@ const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, elem
 
 const createComments = () => ({
   id: getUnique(IDS_COMMENTS),
-      avatar: `img/avatar-${getRandomArrayElement(URLS_AVATARS)}.svg`,
-      message:getRandomArrayElement(MESSAGES),
-      name: getRandomArrayElement(NAMES),
+  avatar: `img/avatar-${getRandomArrayElement(URLS_AVATARS)}.svg`,
+  message:getRandomArrayElement(MESSAGES),
+  name: getRandomArrayElement(NAMES),
 });
 
 const createPhotoDiscription = () => ({
