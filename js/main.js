@@ -1,4 +1,5 @@
-"use strict";
+"use strict"
+
 // Ссылка на функцию https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
 function getRandomIntInclusive(min, max) {
@@ -9,13 +10,14 @@ function getRandomIntInclusive(min, max) {
   } else {
     return 0;
   }
-};
+}
 
 function checkStringLength(testString, maxLength) {
   if (testString.length > maxLength) {
     return false;
   } return true;
-};
+}
+checkStringLength();
 
 const IDS_DISCRIPTIONS = Array.from({ length: 25 }, (v, k) => ++k);
 
