@@ -1,4 +1,4 @@
-import  {photoDiscription} from './data.js';
+import  {photos} from './data.js';
 
 const picturesList = document.querySelector('.pictures');
 picturesList.querySelector('.pictures__title').classList.remove('visually-hidden');
@@ -7,7 +7,7 @@ const pictureTemplate = document.querySelector('#picture')
   .content
   .querySelector('.picture');
 
-const thumbnailPhoto = photoDiscription();
+const thumbnailPhoto = photos;
 
 const picturesThumbnailFragment = document.createDocumentFragment();
 

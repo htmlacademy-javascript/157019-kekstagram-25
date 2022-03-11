@@ -9,6 +9,10 @@ function getRandomIntInclusive(min, max) {
   }
 }
 
+function getKeyCodeESC(evt) {
+  return evt.keyCode === 27;
+}
+
 function checkStringLength(testString, maxLength) {
   if (testString.length > maxLength) {
     return false;
@@ -24,4 +28,4 @@ function getUnique(array) {
 
 const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
-export {getRandomArrayElement, getUnique, checkStringLength};
+export {getRandomArrayElement, getUnique, checkStringLength, getKeyCodeESC};
