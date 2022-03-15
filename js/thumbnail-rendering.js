@@ -1,22 +1,21 @@
 import  {photos} from './data.js';
-
+import { openModal } from './modal-render.js';
 const picturesList = document.querySelector('.pictures');
-picturesList.querySelector('.pictures__title').classList.remove('visually-hidden');
-
-const pictureTemplate = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
-
-const thumbnailPhoto = photos;
-
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const thumbnailsPhotos = photos;
 const picturesThumbnailFragment = document.createDocumentFragment();
 
-thumbnailPhoto.forEach(({url, likes, comments}) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  picturesThumbnailFragment.appendChild(pictureElement);
-});
 
-picturesList.appendChild(picturesThumbnailFragment);
+const renderThumbnailPhoto = () => {
+  thumbnailsPhotos.forEach(({url, likes, comments}) => {
+    const picture = pictureTemplate.cloneNode(true);
+    picture.querySelector('.picture__img').src = url;
+    picture.querySelector('.picture__likes').textContent = likes;
+    picture.querySelector('.picture__comments').textContent = comments.length;
+    picturesThumbnailFragment.appendChild(picture);
+    picturesList.appendChild(picturesThumbnailFragment);
+    openModal(picture);
+  });
+};
+
+export {renderThumbnailPhoto};

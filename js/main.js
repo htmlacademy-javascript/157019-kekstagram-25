@@ -1,5 +1,5 @@
 import './util.js';
-import './thumbnail-rendering.js';
+import {renderThumbnailPhoto} from './thumbnail-rendering.js';
 import './modal-render.js';
 import  {photos} from './data.js';
 
@@ -8,3 +8,4 @@ console.log(
   photos
 );
 
+renderThumbnailPhoto();

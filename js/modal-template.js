@@ -1,27 +1,31 @@
 
-function createModalWindow(pictureDiscription) {
-  const picture = document.querySelector('.big-picture__img').querySelector('img');
+
+const socialCommentsList = document.querySelector('.social__comments');
+const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const picturesCommentFragment = document.createDocumentFragment();
+
+const updateComments = (pictureDiscription) => {
+  pictureDiscription.comments.forEach(({ avatar, name, message })=>{
+    const comment = commentTemplate.cloneNode(true);
+    comment.querySelector('.social__picture').src = avatar;
+    comment.querySelector('.social__picture').alt = name;
+    comment.querySelector('.social__text').textContent = message;
+    picturesCommentFragment.appendChild(comment);
+    socialCommentsList.appendChild(picturesCommentFragment);
+  });
+
+};
+
+function updateModalWindow(pictureDiscription) {
+  const bigPicture = document.querySelector('.big-picture__img').querySelector('img');
   const likesCount = document.querySelector('.likes-count');
   const commentsCount = document.querySelector('.comments-count');
-  const socialComments = document.querySelector('.social__comments');
-  picture.src = pictureDiscription.url;
+  bigPicture.src = pictureDiscription.url;
   likesCount.textContent = pictureDiscription.likes.toString();
   commentsCount.textContent = pictureDiscription.comments.length.toString();
-  const socialCommentsItems = pictureDiscription.comments.map(creatModalCommentsTemplate).join();
-  socialComments.innerHTML = socialCommentsItems;
+  updateComments(pictureDiscription);
 }
 
+export {updateModalWindow};
 
-function creatModalCommentsTemplate({ avatar, name, message }) {
-  return `<li class="social__comment">
-    <img
-      class="social__picture"
-      src="${avatar}"
-      alt="${name}"
-      width="35" height="35">
-      <p class="social__text">${message}</p>
-  </li>`;
-}
-
-export {creatModalCommentsTemplate, createModalWindow};
 
