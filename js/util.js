@@ -1,23 +1,17 @@
 // Ссылка на функцию https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomIntInclusive(min, max) {
+const getRandomIntInclusive = (min, max) => {
   if (min >= 0 && min < max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  } else {
-    return 0;
-  }
+  } return 0;
+};
+
+function isEscapeEvent(evt) {
+  return evt.key === 'Escape';
 }
 
-function getKeyCodeESC(evt) {
-  return evt.keyCode === 27;
-}
-
-function checkStringLength(testString, maxLength) {
-  if (testString.length > maxLength) {
-    return false;
-  } return true;
-}
+const checkTextLength = (text, maxLength) => text.length <= maxLength;
 
 // Функция для получения уникального значения из массива
 function getUnique(array) {
@@ -28,4 +22,4 @@ function getUnique(array) {
 
 const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
-export {getRandomArrayElement, getUnique, checkStringLength, getKeyCodeESC};
+export {getRandomArrayElement, getUnique, checkTextLength, isEscapeEvent};
