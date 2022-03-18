@@ -6,21 +6,19 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const renderPicture = (picture) => {
   const {url, likes, comments} = picture;
 
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
+  const pictureNode = pictureTemplate.cloneNode(true);
+  pictureNode.querySelector('.picture__img').src = url;
+  pictureNode.querySelector('.picture__likes').textContent = likes;
+  pictureNode.querySelector('.picture__comments').textContent = comments.length;
 
-  pictureElement.addEventListener('click', () => {
-    // console.log(picture)
+  pictureNode.addEventListener('click', () => {
     openModal(picture);
   });
-  return pictureElement;
+  return pictureNode;
 };
 
 const addPictures = (pictures) => {
   const fragment = document.createDocumentFragment();
-
   pictures.forEach((picture) => {
     fragment.appendChild(renderPicture(picture));
   });

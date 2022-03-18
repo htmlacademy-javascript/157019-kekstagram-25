@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getUnique} from './util.js';
+import {getRandomArrayElement, getUnique} from './random.js';
 
 const IDS_DISCRIPTIONS = Array.from({ length: 25 }, (v, k) => ++k);
 

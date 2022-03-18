@@ -5,31 +5,36 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const socialCommentsList = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
-const picturesCommentFragment = document.createDocumentFragment();
+const updateComments = (comment) => {
+  const {avatar, name, message} = comment;
 
-const updateComments = (pictureDiscription) => {
-
-  while (socialCommentsList.firstChild) {
-    socialCommentsList.removeChild(socialCommentsList.lastChild);
-  }
-
-  pictureDiscription.comments.forEach(({ avatar, name, message })=>{
-    const comment = commentTemplate.cloneNode(true);
-    comment.querySelector('.social__picture').src = avatar;
-    comment.querySelector('.social__picture').alt = name;
-    comment.querySelector('.social__text').textContent = message;
-    picturesCommentFragment.appendChild(comment);
-    socialCommentsList.appendChild(picturesCommentFragment);
-  });
+  const commentNode = commentTemplate.cloneNode(true);
+  commentNode.querySelector('.social__picture').src = avatar;
+  commentNode.querySelector('.social__picture').alt = name;
+  commentNode.querySelector('.social__text').textContent = message;
+  return commentNode;
 };
 
-function updateModalWindow(pictureDiscription) {
+const addComments = (comments) => {
 
-  bigPicture.src = pictureDiscription.url;
-  likesCount.textContent = pictureDiscription.likes.toString();
-  commentsCount.textContent = pictureDiscription.comments.length.toString();
-  updateComments(pictureDiscription);
-}
+  const fragment = document.createDocumentFragment();
+
+  comments.forEach((comment) => {
+
+    fragment.appendChild(updateComments(comment));
+
+  });
+  socialCommentsList.appendChild(fragment);
+
+};
+
+const updateModalWindow = (picture) => {
+
+  bigPicture.src = picture.url;
+  likesCount.textContent = picture.likes;
+  commentsCount.textContent = picture.comments.length;
+  addComments(picture.comments);
+};
 
 export {updateModalWindow};
 
