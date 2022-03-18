@@ -7,7 +7,7 @@ const getRandomIntInclusive = (min, max) => {
   } return 0;
 };
 
-function isEscapeEvent(evt) {
+function isEscapeKey(evt) {
   return evt.key === 'Escape';
 }
 
@@ -22,4 +22,4 @@ function getUnique(array) {
 
 const getRandomArrayElement = (element) => element[getRandomIntInclusive(0, element.length - 1)];
 
-export {getRandomArrayElement, getUnique, checkTextLength, isEscapeEvent};
+export {getRandomArrayElement, getUnique, checkTextLength, isEscapeKey};

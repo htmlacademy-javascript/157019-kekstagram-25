@@ -1,33 +1,48 @@
-import {photos} from './data.js';
-import {isEscapeEvent} from './util.js';
-import { updateModalWindow} from './modal-template.js';
+import {isEscapeKey} from './util.js';
+import { updateModalWindow } from './modal-template.js';
+
 const bigPicture = document.querySelector('.big-picture');
-// Нашел кнопку закрытия модального окна.
-const bigPictureCancel = document.querySelector('.big-picture__cancel');
+const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
+const likesCount = bigPicture.querySelector('.likes-count');
+const commentsCount = bigPicture.querySelector('.comments-count');
+const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
+
+const onModalEscKeydown = (evt) => {
+  if(isEscapeKey(evt)){
+    evt.preventDefault();
+    // eslint-disable-next-line no-use-before-define
+    closeModal();
+  }
+};
 
 const openModal = (picture) => {
-  picture.addEventListener('click', () => {
-    bigPicture.classList.remove('hidden');
-    updateModalWindow(picture);
-    // Убрал прокрутку у body
-    document.body.classList.add('modal-open');
-    // Спрятал счетчик комментариев и кнопку загрузки
-    bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-    bigPicture.querySelector('.comments-loader').classList.add('hidden');
-  });
-  //Навесил события для закрытия модального окна.
-  bigPictureCancel.addEventListener('click', () => {
-    bigPicture.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-  });
-  // Событие кнопки ESC
-  document.addEventListener('keydown', (evt) => {
-    if (isEscapeEvent(evt)) {
-      evt.preventDefault();
-      bigPicture.classList.add('hidden');
-      document.body.classList.remove('modal-open');
-    }
-  });
+  bigPictureImage.src = picture.url;
+  likesCount.textContent = picture.likes;
+  commentsCount.textContent = picture.comments.length;
+
+  updateModalWindow(picture);
+
+  bigPicture.querySelector('.social__comment-count').classList.add('hidden');
+  bigPicture.querySelector('.comments-loader').classList.add('hidden');
+  bigPicture.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown', onModalEscKeydown);
 };
-updateModalWindow(photos[4]);
+
+const closeModal = () => {
+  bigPicture.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown', onModalEscKeydown);
+};
+
+bigPictureCancel.addEventListener('click', () => {
+  closeModal();
+});
+
+bigPictureCancel.addEventListener('keydown', (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeModal();
+  }
+});
 export {openModal};
