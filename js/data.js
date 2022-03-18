@@ -1,4 +1,4 @@
-import {getRandomArrayElement, getUnique} from './util.js';
+import {getRandomArrayElement, getUnique} from './random.js';
 
 const IDS_DISCRIPTIONS = Array.from({ length: 25 }, (v, k) => ++k);
 
@@ -55,6 +55,8 @@ const createPhotoDiscription = () => ({
   comments: Array.from({length: 3}, createComments),
 });
 
-const photoDiscription = () => Array.from({length: 25}, createPhotoDiscription);
+const createPhotosDiscriptions = () => Array.from({length: 25}, createPhotoDiscription);
 
-export {photoDiscription};
+const photos = createPhotosDiscriptions();
+
+export {photos};

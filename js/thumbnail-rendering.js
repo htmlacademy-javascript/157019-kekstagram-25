@@ -1,22 +1,29 @@
-import  {photoDiscription} from './data.js';
+import { openModal,} from './modal-render.js';
 
 const picturesList = document.querySelector('.pictures');
-picturesList.querySelector('.pictures__title').classList.remove('visually-hidden');
+const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const pictureTemplate = document.querySelector('#picture')
-  .content
-  .querySelector('.picture');
+const renderPicture = (picture) => {
+  const {url, likes, comments} = picture;
 
-const thumbnailPhoto = photoDiscription();
+  const pictureNode = pictureTemplate.cloneNode(true);
+  pictureNode.querySelector('.picture__img').src = url;
+  pictureNode.querySelector('.picture__likes').textContent = likes;
+  pictureNode.querySelector('.picture__comments').textContent = comments.length;
 
-const picturesThumbnailFragment = document.createDocumentFragment();
+  pictureNode.addEventListener('click', () => {
+    openModal(picture);
+  });
+  return pictureNode;
+};
 
-thumbnailPhoto.forEach(({url, likes, comments}) => {
-  const pictureElement = pictureTemplate.cloneNode(true);
-  pictureElement.querySelector('.picture__img').src = url;
-  pictureElement.querySelector('.picture__likes').textContent = likes;
-  pictureElement.querySelector('.picture__comments').textContent = comments.length;
-  picturesThumbnailFragment.appendChild(pictureElement);
-});
+const addPictures = (pictures) => {
+  const fragment = document.createDocumentFragment();
+  pictures.forEach((picture) => {
+    fragment.appendChild(renderPicture(picture));
+  });
 
-picturesList.appendChild(picturesThumbnailFragment);
+  picturesList.appendChild(fragment);
+};
+
+export {addPictures};
