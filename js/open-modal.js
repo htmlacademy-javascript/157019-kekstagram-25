@@ -21,7 +21,7 @@ function openModal(picture) {
   bigPictureImage.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-
+  socialCommentsList.textContent = '';
   updateModalWindow(picture);
 
   socialCommentCount.classList.add('hidden');
@@ -35,7 +35,6 @@ function hideModal() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onModalEscKeydown);
-  socialCommentsList.textContent = '';
 }
 
 bigPictureCancel.addEventListener('click', () => {

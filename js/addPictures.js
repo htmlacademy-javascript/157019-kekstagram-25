@@ -1,4 +1,4 @@
-import { openModal,} from './modal-render.js';
+import { openModal,} from './open-modal.js';
 
 const picturesList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');

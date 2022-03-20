@@ -1,7 +1,9 @@
+import './validanion.js';
 import './util.js';
-import './modal-render.js';
+import './open-modal.js';
 import  {photos} from './data.js';
+import './open-upload.js';
 
-import {addPictures} from './thumbnail-rendering.js';
+import {addPictures} from './addPictures.js';
 
 addPictures(photos);
