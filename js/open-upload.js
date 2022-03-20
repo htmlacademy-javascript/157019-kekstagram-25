@@ -4,8 +4,8 @@ const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const uploadFile = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
-const imageUploadTextInput = document.querySelector('.img-upload__text input')
-const imageUploadTextTextarea = document.querySelector('.img-upload__text textarea')
+const imageUploadTextInput = document.querySelector('.img-upload__text input');
+const imageUploadTextTextarea = document.querySelector('.img-upload__text textarea');
 
 const onUploadImageEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
