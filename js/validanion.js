@@ -14,20 +14,27 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 imgUploadForm.addEventListener('submit', (evt) => {
-  const hashtagsCollection = textHashtags.value.toLowerCase().trim().split(/\s+/);
+  // const hashtagsCollection = textHashtags.value.toLowerCase().trim().split(/\s+/);
 
   console.log(textHashtags.value.toLowerCase().trim().split(/\s+/));
 
-  const validateUniqueHashtags = () => countingDuplicate(textHashtags.value.toLowerCase().trim().split(/\s+/)) === 0;
+  const validateUniqueHashtags = () => countingDuplicate(textHashtags.value.toLowerCase().trim().split(/\s+/) === 0);
   const validateCountHashtags = () => countingItems(textHashtags.value.toLowerCase().trim().split(/\s+/)) <= 5;
+  console.log(validateCountHashtags());
   const validateSymbolsHashtags = () => {
-    for ( const item of hashtagsCollection) {
+    for ( const item of textHashtags.value.toLowerCase().trim().split(/\s+/)) {
       if (reHashtagSymbols.test(item)) {continue;}
       return false;
     } return true;
   };
-  const validateSpace = () => !reSpace.test(textHashtags.value);
 
+  console.log(validateSymbolsHashtags());
+
+  const validateSpace = () => !reSpace.test(textHashtags.value);
+  const value = textHashtags.value.trim();
+  if (value === '') {
+    return;
+  }
   pristine.addValidator(document.querySelector('.text__hashtags'),validateUniqueHashtags,'Все хештеги должны быть разными');
   pristine.addValidator(document.querySelector('.text__hashtags'), validateCountHashtags, 'Не более 5 хештегов');
   pristine.addValidator(document.querySelector('.text__hashtags'),validateSymbolsHashtags,'После # используй буквы и цифры');
