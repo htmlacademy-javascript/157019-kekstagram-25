@@ -26,10 +26,10 @@ imgUploadForm.addEventListener('submit', (evt) => {
   };
   // console.log('После # используй буквы и цифры ' + validateSymbolsHashtags());
   const validateSpace = () => !reSpace.test(textHashtags.value);
-  const value = textHashtags.value.trim();
-  if (value === '') {
-    return;
-  }
+  // const value = textHashtags.value.trim();
+  // if (value === '') {
+  //   return;
+  // }
   pristine.addValidator(document.querySelector('.text__hashtags'),validateUniqueHashtags,'Все хештеги должны быть разными');
   pristine.addValidator(document.querySelector('.text__hashtags'), validateCountHashtags, 'Не более 5 хештегов');
   pristine.addValidator(document.querySelector('.text__hashtags'),validateSymbolsHashtags,'После # используй буквы и цифры');
