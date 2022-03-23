@@ -16,13 +16,13 @@ const pristine = new Pristine(imgUploadForm, {
 imgUploadForm.addEventListener('submit', (evt) => {
   // const hashtagsCollection = textHashtags.value.toLowerCase().trim().split(/\s+/);
 
-  console.log(textHashtags.value.toLowerCase().trim().split(/\s+/));
+  console.log(textHashtags.value.toLowerCase().trim().split(' '));
 
-  const validateUniqueHashtags = () => countingDuplicate(textHashtags.value.toLowerCase().trim().split(/\s+/) === 0);
-  const validateCountHashtags = () => countingItems(textHashtags.value.toLowerCase().trim().split(/\s+/)) <= 5;
+  const validateUniqueHashtags = () => countingDuplicate(textHashtags.value.toLowerCase().trim().split(' ')) === 0;
+  const validateCountHashtags = () => countingItems(textHashtags.value.toLowerCase().trim().split(' ')) <= 5;
   console.log(validateCountHashtags());
   const validateSymbolsHashtags = () => {
-    for ( const item of textHashtags.value.toLowerCase().trim().split(/\s+/)) {
+    for ( const item of textHashtags.value.toLowerCase().trim().split(' ')) {
       if (reHashtagSymbols.test(item)) {continue;}
       return false;
     } return true;
