@@ -1272,6 +1272,7 @@ main {
 .error__hash-tag {
   color: #ffffff;
   margin-top: -20px;
+  margin-left: -180px;
   font-size: 15px;
   text-transform: none;
 }

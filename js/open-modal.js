@@ -21,7 +21,7 @@ function openModal(picture) {
   bigPictureImage.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-  socialCommentsList.textContent = '';
+  socialCommentsList.innerHTML = '';
   updateModalWindow(picture);
 
   socialCommentCount.classList.add('hidden');

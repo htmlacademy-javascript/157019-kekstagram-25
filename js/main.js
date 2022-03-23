@@ -4,6 +4,6 @@ import './open-modal.js';
 import  {photos} from './data.js';
 import './open-upload.js';
 
-import {addPictures} from './addPictures.js';
+import {addPictures} from './add-pictures.js';
 
 addPictures(photos);

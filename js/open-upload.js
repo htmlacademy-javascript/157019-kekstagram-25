@@ -1,7 +1,6 @@
 import {isEscapeKey} from './util.js';
 
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
-const body = document.querySelector('body');
 const uploadFile = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imageUploadTextInput = document.querySelector('.img-upload__text input');
@@ -14,15 +13,23 @@ const onUploadImageEscKeydown = (evt) => {
   }
 };
 
+const onUploadFileChange = () => {
+  showUploadPicture();
+};
+
+const onUploadCancelClick = () => {
+  hideUploadPicture();
+};
+
 function showUploadPicture() {
   imageUploadOverlay.classList.remove('hidden');
-  body.classList.remove('modal-open');
+  document.body.classList.add('modal-open');
   document.addEventListener('keydown', onUploadImageEscKeydown);
 }
 
 function hideUploadPicture() {
   imageUploadOverlay.classList.add('hidden');
-  body.classList.add('modal-open');
+  document.body.classList.remove('modal-open');
   uploadFile.value = '';
   document.removeEventListener('keydown', onUploadImageEscKeydown);
   imageUploadTextInput.addEventListener('keydown', (evt) => {
@@ -37,6 +44,6 @@ function hideUploadPicture() {
   });
 }
 
-uploadFile.addEventListener('change', showUploadPicture);
+uploadFile.addEventListener('change', onUploadFileChange);
 
-uploadCancel.addEventListener('click', hideUploadPicture);
+uploadCancel.addEventListener('click', onUploadCancelClick);
