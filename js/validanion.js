@@ -12,7 +12,6 @@ const pristine = new Pristine(imgUploadForm, {
 });
 
 imgUploadForm.addEventListener('submit', (evt) => {
-
   // const hashtagsCollection = textHashtags.value.toLowerCase().trim().split(/\s+/);
   const validateUniqueHashtags = () => countingDuplicate(textHashtags.value.toLowerCase().trim().split(' ')) === 0;
   // console.log('Все хештеги должны быть разными ' + validateUniqueHashtags());
@@ -30,10 +29,10 @@ imgUploadForm.addEventListener('submit', (evt) => {
   // if (value === '') {
   //   return;
   // }
-  pristine.addValidator(document.querySelector('.text__hashtags'),validateUniqueHashtags,'Все хештеги должны быть разными');
-  pristine.addValidator(document.querySelector('.text__hashtags'), validateCountHashtags, 'Не более 5 хештегов');
-  pristine.addValidator(document.querySelector('.text__hashtags'),validateSymbolsHashtags,'После # используй буквы и цифры');
-  pristine.addValidator(document.querySelector('.text__hashtags'), validateSpace, 'Забыл о пробелах');
+  pristine.addValidator(textHashtags,validateUniqueHashtags,'Все хештеги должны быть разными');
+  pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 хештегов');
+  pristine.addValidator(textHashtags,validateSymbolsHashtags,'После # используй буквы и цифры');
+  pristine.addValidator(textHashtags, validateSpace, 'Забыл о пробелах');
 
   const isValid = pristine.validate();
   if (!isValid) {
