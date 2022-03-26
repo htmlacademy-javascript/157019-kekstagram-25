@@ -2,25 +2,15 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const checkTextLength = (text, maxLength) => text.length <= maxLength;
 
-const countingItems = (items) => {
-  let itemsCount = 0;
-  for (let i = 0; i < items.length; i++){
-    itemsCount++;
-  }
-  return itemsCount;
-};
 
-const countingDuplicate = (items) => {
-  let duplicateCount = 0;
+const checkDuplicate = (items) => {
   for (let i = 0; i < items.length; i++) {
-    for (let j = i + 1; j < items.length; j++) {
-      if (items[i] === items[j]) {
-        duplicateCount++;
-      }
+    if (items.indexOf(items[i], i + 1) !== -1) { // > -1
+      return true;
     }
   }
-  return duplicateCount;
+
+  return false;
 };
 
-export {countingItems, checkTextLength, isEscapeKey, countingDuplicate};
-
+export { checkTextLength, isEscapeKey, checkDuplicate};

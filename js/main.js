@@ -1,4 +1,4 @@
-import './validanion.js';
+import './validait-form.js';
 import './util.js';
 import './open-modal.js';
 import  {photos} from './data.js';
