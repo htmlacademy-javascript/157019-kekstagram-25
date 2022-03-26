@@ -6,11 +6,19 @@ const uploadCancel = document.querySelector('#upload-cancel');
 const imageUploadTextInput = document.querySelector('.img-upload__text input');
 const imageUploadTextTextarea = document.querySelector('.img-upload__text textarea');
 
-const onUploadImageEscKeydown = (evt) => {
+const onEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
     evt.preventDefault();
     hideUploadPicture();
   }
+};
+
+const addEscKeydown = () => {
+  document.addEventListener('keydown', onEscKeydown);
+};
+
+const cancelEscKeydown = () => {
+  document.removeEventListener('keydown', onEscKeydown);
 };
 
 const onUploadFileChange = () => {
@@ -24,25 +32,20 @@ const onUploadCancelClick = () => {
 function showUploadPicture() {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  document.addEventListener('keydown', onUploadImageEscKeydown);
+  addEscKeydown();
 }
 
 function hideUploadPicture() {
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   uploadFile.value = '';
-  document.removeEventListener('keydown', onUploadImageEscKeydown);
-  imageUploadTextInput.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.stopPropagation();
-    }
-  });
-  imageUploadTextTextarea.addEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.stopPropagation();
-    }
-  });
+  cancelEscKeydown();
 }
+imageUploadTextInput.addEventListener('focusin', cancelEscKeydown);
+imageUploadTextInput.addEventListener('focusout', addEscKeydown);
+
+imageUploadTextTextarea.addEventListener('focusin', cancelEscKeydown);
+imageUploadTextTextarea.addEventListener('focusout', addEscKeydown);
 
 uploadFile.addEventListener('change', onUploadFileChange);
 
