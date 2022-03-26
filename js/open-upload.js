@@ -13,18 +13,18 @@ const hideUploadPicture = () => {
   uploadFile.value = '';
 };
 
-const addEscKeydown = () => {
+const addEscKeydownHandler = () => {
   document.addEventListener('keydown', onEscKeydown);
 };
 
-const cancelEscKeydown = () => {
+const removeEscKeydownHandler = () => {
   document.removeEventListener('keydown', onEscKeydown);
 };
 
 const showUploadPicture = () => {
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
-  addEscKeydown();
+  addEscKeydownHandler();
 };
 
 const onUploadFileChange = () => {
@@ -39,15 +39,15 @@ function onEscKeydown(evt) {
   if(isEscapeKey(evt)){
     evt.preventDefault();
     hideUploadPicture();
-    cancelEscKeydown();
+    removeEscKeydownHandler();
   }
 }
 
-imageUploadTextInput.addEventListener('focusin', cancelEscKeydown);
-imageUploadTextInput.addEventListener('focusout', addEscKeydown);
+imageUploadTextInput.addEventListener('focusin', removeEscKeydownHandler);
+imageUploadTextInput.addEventListener('focusout', addEscKeydownHandler);
 
-imageUploadTextTextarea.addEventListener('focusin', cancelEscKeydown);
-imageUploadTextTextarea.addEventListener('focusout', addEscKeydown);
+imageUploadTextTextarea.addEventListener('focusin', removeEscKeydownHandler);
+imageUploadTextTextarea.addEventListener('focusout', addEscKeydownHandler);
 
 uploadFile.addEventListener('change', onUploadFileChange);
 
