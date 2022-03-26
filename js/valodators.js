@@ -30,4 +30,4 @@ const validateTextHashtagsEmpty = () => {
 
 const validateSpace = () => ! reSpace.test(textHashtags.value);
 
-export{ validateUniqueHashtags, validateSymbolsHashtags, validateCountHashtags, validateTextHashtagsEmpty, validateSpace };
+export{ validateTextHashtagsEmpty, validateUniqueHashtags, validateSymbolsHashtags, validateCountHashtags, validateSpace };

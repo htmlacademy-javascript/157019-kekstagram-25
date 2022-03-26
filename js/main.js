@@ -1,4 +1,4 @@
-import './valid-form.js';
+import './form.js';
 import './util.js';
 import './open-modal.js';
 import  {photos} from './data.js';
