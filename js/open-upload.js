@@ -18,7 +18,7 @@ const addEscKeydown = () => {
 };
 
 const cancelEscKeydown = () => {
-  document.removeEventListener('keydown', onEscKeydown);;
+  document.removeEventListener('keydown', onEscKeydown);
 };
 
 const showUploadPicture = () => {
