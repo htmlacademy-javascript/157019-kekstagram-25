@@ -1269,6 +1269,14 @@ main {
           transform: translateX(-50%);
 }
 
+.error__hash-tag {
+  color: #ffffff;
+  margin-top: -20px;
+  margin-left: -180px;
+  font-size: 15px;
+  text-transform: none;
+}
+
 .error__button,
 .success__button {
   padding: 5px 10px;

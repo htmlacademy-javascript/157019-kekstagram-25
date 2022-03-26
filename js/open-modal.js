@@ -8,7 +8,7 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
-const socialCommentsList = document.querySelector('.social__comments');
+const socialCommentsList = bigPicture.querySelector('.social__comments');
 
 const onModalEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
@@ -21,7 +21,7 @@ function openModal(picture) {
   bigPictureImage.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-
+  socialCommentsList.innerHTML = '';
   updateModalWindow(picture);
 
   socialCommentCount.classList.add('hidden');
@@ -35,7 +35,6 @@ function hideModal() {
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown', onModalEscKeydown);
-  socialCommentsList.textContent = '';
 }
 
 bigPictureCancel.addEventListener('click', () => {
