@@ -1,9 +1,9 @@
 import { validateUniqueHashtags, validateSymbolsHashtags, validateCountHashtags, validateTextHashtagsEmpty, validateSpace } from './valodators.js';
 
-const imgUploadForm = document.querySelector('.img-upload__form');
+const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
 
-const pristine = new Pristine(imgUploadForm, {
+const pristine = new Pristine(form, {
   classTo: 'text-info',
   errorTextParent: 'text-info',
   errorTextClass: 'error__hash-tag',
@@ -17,7 +17,7 @@ pristine.addValidator(textHashtags, validateSymbolsHashtags, 'После # ис�
 
 pristine.validate();
 
-imgUploadForm.addEventListener('submit', (evt) => {
+form.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (!isValid) {
     evt.preventDefault();
