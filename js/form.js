@@ -1,4 +1,4 @@
-import { validateUniqueHashtags, validateSymbolsHashtags, validateCountHashtags, validateTextHashtagsEmpty, validateSpace } from './valodators.js';
+import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './valodators.js';
 
 const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
