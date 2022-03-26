@@ -8,7 +8,7 @@ const commentsCount = bigPicture.querySelector('.comments-count');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 const socialCommentCount = bigPicture.querySelector('.social__comment-count');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
-const socialCommentsList = document.querySelector('.social__comments');
+const socialCommentsList = bigPicture.querySelector('.social__comments');
 
 const onModalEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
