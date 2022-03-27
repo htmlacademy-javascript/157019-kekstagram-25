@@ -71,10 +71,9 @@ const SETTINGS = {
   }
 };
 
-const clearEffect = () => {
+const clear = () => {
   image.className = 'effects effects__preview--none';
   image.style.filter = '';
-  
 };
 
 const initRangeSlider = () => {
@@ -98,7 +97,7 @@ const initRangeSlider = () => {
       sliderElement.noUiSlider.updateOptions(SETTINGS[effect]);
       sliderElement.removeAttribute('disabled');
       if (effect === 'none') {
-        clearEffect();
+        clear();
         sliderElement.setAttribute('disabled', true);
       }
     });
