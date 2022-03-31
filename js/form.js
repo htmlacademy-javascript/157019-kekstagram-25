@@ -3,7 +3,7 @@ import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEm
 const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
 
-const pristine = new Pristine(form, {
+const pristine = new window.Pristine(form, {
   classTo: 'text-info',
   errorTextParent: 'text-info',
   errorTextClass: 'error__hash-tag',
