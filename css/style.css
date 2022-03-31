@@ -574,7 +574,7 @@ main {
 .effects {
   margin: 0;
   padding: 0;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
   border: none;
 }
 
@@ -1419,7 +1419,7 @@ main {
 
 .error__hash-tag {
   color: #ffffff;
-  margin-top: -20px;
+  /* margin-top: -20px; */
   margin-left: -180px;
   font-size: 15px;
   text-transform: none;

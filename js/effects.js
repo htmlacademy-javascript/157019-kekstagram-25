@@ -1,10 +1,4 @@
-const effectsList = document.querySelectorAll('.effects__item');
-const image = document.querySelector('.img-upload__preview img');
-const sliderElement = document.querySelector('.effect-level__slider');
-const effectLevel = document.querySelector('.effect-level__value');
-let effect = 'none';
-
-const STYLES = {
+const stylesMap = {
   none: '',
   chrome: 'grayscale',
   sepia: 'sepia',
@@ -13,7 +7,7 @@ const STYLES = {
   heat: 'brightness'
 };
 
-const SIGNS = {
+const signsMap = {
   none: '',
   chrome: '',
   sepia: '',
@@ -22,7 +16,7 @@ const SIGNS = {
   heat: ''
 };
 
-const SETTINGS = {
+const settingsMap = {
   none: {},
 
   chrome: {
@@ -54,7 +48,7 @@ const SETTINGS = {
 
   phobos: {
     range: {
-      min: 1,
+      min: 0,
       max: 3,
     },
     step: 0.1,
@@ -70,6 +64,14 @@ const SETTINGS = {
     start: 3
   }
 };
+const NONE_EFFECT = 'none';
+const effectsList = document.querySelector('.effects__list');
+const image = document.querySelector('.img-upload__preview img');
+const effectSlider = document.querySelector('.effect-level__slider');
+const effectLevel = document.querySelector('.effect-level__value');
+let effect = 'none';
+
+const uploadEffectLevel = document.querySelector('.img-upload__effect-level');
 
 const clear = () => {
   image.className = 'effects effects__preview--none';
@@ -77,7 +79,7 @@ const clear = () => {
 };
 
 const initRangeSlider = () => {
-  noUiSlider.create(sliderElement, {
+  noUiSlider.create(effectSlider, {
     range: {
       min: 0,
       max: 1,
@@ -86,22 +88,25 @@ const initRangeSlider = () => {
     step: 0.1
   });
 
-  sliderElement.noUiSlider.on('update', () => {
-    effectLevel.value = sliderElement.noUiSlider.get();
-    image.style.filter = `${STYLES[effect]}(${effectLevel.value}${SIGNS[effect]})`;
+  effectSlider.noUiSlider.on('update', () => {
+    effectLevel.value = effectSlider.noUiSlider.get();
+    image.style.filter = `${stylesMap[effect]}(${effectLevel.value}${signsMap[effect]})`;
+    uploadEffectLevel.classList.remove('hidden');
+    if (effect === NONE_EFFECT) {
+      uploadEffectLevel.classList.add('hidden');
+      effectSlider.setAttribute('disabled', true);
+    }
   });
-  for (const element of effectsList) {
-    element.addEventListener('change', (evt) => {
-      effect = evt.target.value;
-      image.className = `effects effects__preview--${effect}`;
-      sliderElement.noUiSlider.updateOptions(SETTINGS[effect]);
-      sliderElement.removeAttribute('disabled');
-      if (effect === 'none') {
-        clear();
-        sliderElement.setAttribute('disabled', true);
-      }
-    });
-  }
+  effectsList.addEventListener('change', (evt) => {
+    effect = evt.target.value;
+    image.className = `effects effects__preview--${effect}`;
+    effectSlider.noUiSlider.updateOptions(settingsMap[effect]);
+    effectSlider.removeAttribute('disabled');
+    if (effect === NONE_EFFECT) {
+      clear();
+    }
+  });
 };
 
-initRangeSlider();
+export {initRangeSlider};
+
