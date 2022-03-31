@@ -1,5 +1,4 @@
 import {isEscapeKey} from './util.js';
-// import { changeImageScale } from './scale.js';
 
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
