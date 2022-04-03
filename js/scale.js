@@ -25,7 +25,7 @@ smallerScale.addEventListener('click', () => {
 
 biggerScale.addEventListener('click', () => {
   if (currentScale + ScaleValue.STEP <= ScaleValue.MAX) {
-    changeImageScale(currentScale + ScaleValue.STEP)
+    changeImageScale(currentScale + ScaleValue.STEP);
   }
 });
 
