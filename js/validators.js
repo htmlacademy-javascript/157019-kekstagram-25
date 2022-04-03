@@ -1,7 +1,8 @@
 import { checkDuplicate } from './util.js';
 
-const textHashtags = document.querySelector('.text__hashtags');
 const HASHTAG_MAX_COUNT = 5;
+
+const textHashtags = document.querySelector('.text__hashtags');
 const reSpace = /\b#[A-Za-zА-Яа-яЁё0-9]/;
 const hashtagSymbolRegexp = /^#[A-Za-zА-Яа-яЁё0-9]{1,20}$/;
 const getHashTagsFromInput = () => textHashtags.value.trim().toLowerCase().split(' ');

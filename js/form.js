@@ -1,9 +1,9 @@
-import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './valodators.js';
+import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './validators.js';
 
 const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
 
-const pristine = new Pristine(form, {
+const pristine = new window.Pristine(form, {
   classTo: 'text-info',
   errorTextParent: 'text-info',
   errorTextClass: 'error__hash-tag',
@@ -21,6 +21,7 @@ form.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (value === '') {
     pristine.validate();
+    document.querySelector('.pristine-error').textContent = '';
   } else {
     if (!isValid) {
       evt.preventDefault();
