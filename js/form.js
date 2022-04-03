@@ -21,6 +21,7 @@ form.addEventListener('submit', (evt) => {
   const isValid = pristine.validate();
   if (value === '') {
     pristine.validate();
+    document.querySelector('.pristine-error').textContent = '';
   } else {
     if (!isValid) {
       evt.preventDefault();

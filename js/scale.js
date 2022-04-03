@@ -1,4 +1,4 @@
-const scaleValue = {
+const ScaleValue = {
   MAX: 100,
   MIN: 25,
   STEP: 25,
@@ -9,25 +9,29 @@ const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
 const scaleControl = document.querySelector('.scale__control--value');
 
+let currentScale = ScaleValue.MAX;
+
 const changeImageScale = (value) => {
-  const parsScaleValue = parseInt(value, 10) / 100;
-  previewImage.style.transform = `scale(${parsScaleValue})`;
+  currentScale = value;
+  scaleControl.value = `${value}%`;
+  previewImage.style.transform = `scale(${value / 100})`;
 };
 
 smallerScale.addEventListener('click', () => {
-  const result = parseInt(scaleControl.value, 10) - scaleValue.STEP;
-  if (result >= scaleValue.MIN) {
-    changeImageScale(result);
-    scaleControl.value = `${result}%`;
+  if (currentScale - ScaleValue.STEP >= ScaleValue.MIN) {
+    changeImageScale(currentScale - ScaleValue.STEP);
   }
 });
 
 biggerScale.addEventListener('click', () => {
-  const result = parseInt(scaleControl.value, 10) + scaleValue.STEP;
-  if (result <= scaleValue.MAX) {
-    changeImageScale(result);
-    scaleControl.value = `${result}%`;
+  if (currentScale + ScaleValue.STEP <= ScaleValue.MAX) {
+    changeImageScale(currentScale + ScaleValue.STEP)
   }
 });
 
-changeImageScale(scaleControl.value);
+changeImageScale(ScaleValue.MAX);
+
+export {
+  changeImageScale,
+  ScaleValue,
+};

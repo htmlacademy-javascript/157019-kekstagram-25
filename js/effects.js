@@ -1,3 +1,5 @@
+const DEFAULT_EFFECT = 'none';
+
 const stylesMap = {
   none: '',
   chrome: 'grayscale',
@@ -64,17 +66,19 @@ const settingsMap = {
     start: 3
   }
 };
-const NONE_EFFECT = 'none';
+
 const effectsList = document.querySelector('.effects__list');
 const image = document.querySelector('.img-upload__preview img');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
-let effect = 'none';
+let effect = DEFAULT_EFFECT;
 
 const uploadEffectLevel = document.querySelector('.img-upload__effect-level');
 
-const clear = () => {
+const clearEffect = () => {
   image.className = 'effects effects__preview--none';
+  effectSlider.setAttribute('disabled', true);
+  uploadEffectLevel.classList.add('hidden');
   image.style.filter = '';
 };
 
@@ -92,7 +96,7 @@ const initRangeSlider = () => {
     effectLevel.value = effectSlider.noUiSlider.get();
     image.style.filter = `${stylesMap[effect]}(${effectLevel.value}${signsMap[effect]})`;
     uploadEffectLevel.classList.remove('hidden');
-    if (effect === NONE_EFFECT) {
+    if (effect === DEFAULT_EFFECT) {
       uploadEffectLevel.classList.add('hidden');
       effectSlider.setAttribute('disabled', true);
     }
@@ -102,11 +106,11 @@ const initRangeSlider = () => {
     image.className = `effects effects__preview--${effect}`;
     effectSlider.noUiSlider.updateOptions(settingsMap[effect]);
     effectSlider.removeAttribute('disabled');
-    if (effect === NONE_EFFECT) {
-      clear();
+    if (effect === DEFAULT_EFFECT) {
+      clearEffect();
     }
   });
 };
 
-export {initRangeSlider};
+export {clearEffect, initRangeSlider};
 
