@@ -1,7 +1,7 @@
 const bigPicture = document.querySelector('.big-picture');
 const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
-
+const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentsList = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
@@ -29,7 +29,7 @@ const addComments = (comments) => {
 };
 
 const updateModalWindow = (picture) => {
-
+  socialCaption.textContent = picture.description;
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
