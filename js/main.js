@@ -1,14 +1,16 @@
-import './form.js';
+import {setFormSubmit} from './form.js';
 import {initRangeSlider} from './effects.js';
 import './scale.js';
 import './util.js';
-import './open-modal.js';
-import './open-upload.js';
-import { createLoader } from './load.js';
+import './modal.js';
+import {hideUploadPicture} from './open-upload.js';
+import {getData} from './api.js';
+import {addPictures} from './add-pictures.js';
 
-const loadPictures = createLoader(console.log, console.error)
-
+getData((picturs) => {
+  addPictures(picturs);
+});
+setFormSubmit(hideUploadPicture);
 initRangeSlider();
-loadPictures();
 
 

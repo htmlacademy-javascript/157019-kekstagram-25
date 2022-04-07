@@ -2,7 +2,6 @@ import { isEscapeKey } from './util.js';
 import { changeImageScale, ScaleValue } from './scale.js';
 import { clearEffect } from './effects.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const uploadFile = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
@@ -17,12 +16,12 @@ const removeEscKeydownHandler = () => {
 };
 
 const hideUploadPicture = () => {
-  uploadForm.reset();
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   changeImageScale(ScaleValue.MAX);
   removeEscKeydownHandler();
   clearEffect();
+  document.querySelector('.pristine-error').textContent = '';
 };
 
 const showUploadPicture = () => {
@@ -63,3 +62,5 @@ imageUploadTextTextarea.addEventListener('focusout', () => {
 uploadFile.addEventListener('change', onUploadFileChange);
 
 uploadCancel.addEventListener('click', onUploadCancelClick);
+
+export {hideUploadPicture};

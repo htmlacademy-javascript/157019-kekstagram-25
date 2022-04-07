@@ -1,4 +1,6 @@
 import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './validators.js';
+import { showAlert } from './util.js';
+import { sendData } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
 const textHashtags = document.querySelector('.text__hashtags');
@@ -16,15 +18,21 @@ pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 х
 pristine.addValidator(textHashtags, validateUniqueHashtags, 'Все хештеги должны быть разными', 1, true);
 pristine.addValidator(textHashtags, validateSymbolsHashtags, 'После # используй буквы и цифры', 1, true);
 
-form.addEventListener('submit', (evt) => {
-  const value = textHashtags.value.trim();
-  const isValid = pristine.validate();
-  if (value === '') {
-    pristine.validate();
-    document.querySelector('.pristine-error').textContent = '';
-  } else {
-    if (!isValid) {
-      evt.preventDefault();
+const setFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const value = textHashtags.value.trim();
+    const isValid = pristine.validate();
+    if (value === '' || isValid) {
+      pristine.validate();
+      sendData(
+        () => onSuccess(),
+        () => showAlert('Не удалось отправить форму. Попробуйте позже.'),
+        new FormData(evt.target),
+      );
+      
     }
-  }
-});
+  });
+};
+export {setFormSubmit};
+
