@@ -29,8 +29,7 @@ const setFormSubmit = (onSuccess) => {
         () => onSuccess(),
         () => showAlert('Не удалось отправить форму. Попробуйте позже.'),
         new FormData(evt.target),
-      );
-    }
+      );}
   });
 };
 export {setFormSubmit};
