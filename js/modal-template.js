@@ -1,9 +1,13 @@
+let MAX_COMMENTS_COUNT = 5;
+
 const bigPicture = document.querySelector('.big-picture');
 const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
 const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentsList = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const commentsLoader = document.querySelector('.social__comments-loader');
+
 
 const updateComments = (comment) => {
   const {avatar, name, message} = comment;
@@ -16,16 +20,12 @@ const updateComments = (comment) => {
 };
 
 const addComments = (comments) => {
-
   const fragment = document.createDocumentFragment();
-
   comments.forEach((comment) => {
-
     fragment.appendChild(updateComments(comment));
-
   });
   socialCommentsList.appendChild(fragment);
-
+  console.log(socialCommentsList);
 };
 
 const updateModalWindow = (picture) => {
@@ -33,8 +33,11 @@ const updateModalWindow = (picture) => {
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-  addComments(picture.comments);
+  addComments(picture.comments.slice(0, MAX_COMMENTS_COUNT));
+  console.log(picture.comments);
 };
+
+// commentsLoader.addEventListener('click', () => addComments(picture.comments.slice(0, MAX_COMMENTS_COUNT += 5 ));
 
 export {updateModalWindow};
 
