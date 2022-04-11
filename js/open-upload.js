@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { changeImageScale, ScaleValue } from './scale.js';
 import { clearEffect } from './effects.js';
+import { resetValidators } from './form.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -23,7 +24,7 @@ const hideUploadPicture = () => {
   changeImageScale(ScaleValue.MAX);
   removeEscKeydownHandler();
   clearEffect();
-  document.querySelector('.pristine-error').textContent = '';
+  resetValidators();
 };
 
 const showUploadPicture = () => {

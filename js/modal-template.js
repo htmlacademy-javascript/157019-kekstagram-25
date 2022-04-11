@@ -7,7 +7,7 @@ const socialCaption = bigPicture.querySelector('.social__caption');
 const socialCommentsList = document.querySelector('.social__comments');
 const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const commentsLoader = document.querySelector('.social__comments-loader');
-
+const currentCommentsCount = document.querySelector('.current-comments-count');
 
 const updateComments = (comment) => {
   const {avatar, name, message} = comment;
@@ -25,7 +25,6 @@ const addComments = (comments) => {
     fragment.appendChild(updateComments(comment));
   });
   socialCommentsList.appendChild(fragment);
-  console.log(socialCommentsList);
 };
 
 const updateModalWindow = (picture) => {
@@ -33,11 +32,24 @@ const updateModalWindow = (picture) => {
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
-  addComments(picture.comments.slice(0, MAX_COMMENTS_COUNT));
-  console.log(picture.comments);
-};
+  const loadedComments = picture.comments.slice(0, MAX_COMMENTS_COUNT);
+  addComments(loadedComments);
+  currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
+  if (picture.comments.length ===  socialCommentsList.childElementCount) {
+    commentsLoader.classList.add('hidden');
+  }
 
-// commentsLoader.addEventListener('click', () => addComments(picture.comments.slice(0, MAX_COMMENTS_COUNT += 5 ));
+  let count = 5;
+  commentsLoader.addEventListener('click', () => {
+    let CommentsPart = picture.comments.slice(count, count + 5);
+    count += 5;
+    addComments(CommentsPart);
+    currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
+    if (picture.comments.length ===  socialCommentsList.childElementCount) {
+      commentsLoader.classList.add('hidden');
+    }
+  });
+};
 
 export {updateModalWindow};
 

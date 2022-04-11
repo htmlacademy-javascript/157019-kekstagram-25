@@ -11,7 +11,6 @@ const pristine = new window.Pristine(form, {
   errorTextClass: 'error__hash-tag',
 });
 
-
 pristine.addValidator(textHashtags, validateTextHashtagsEmpty, '', 1, true);
 pristine.addValidator(textHashtags, validateSpace, 'Забыл о пробелах', 1, true);
 pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 хештегов', 1, true);
@@ -26,11 +25,15 @@ const setFormSubmit = (onSuccess) => {
     if (value === '' || isValid) {
       pristine.validate();
       sendData(
-        () => onSuccess(),
-        () => showAlert('Не удалось отправить форму. Попробуйте позже.'),
+        onSuccess,
+        showAlert,
         new FormData(evt.target),
       );}
   });
 };
-export {setFormSubmit};
 
+const resetValidators = () => {
+  pristine.reset();
+};
+
+export {setFormSubmit, resetValidators};

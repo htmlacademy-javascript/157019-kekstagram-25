@@ -7,8 +7,8 @@ import {hideUploadPicture} from './open-upload.js';
 import {getData} from './api.js';
 import {addPictures} from './add-pictures.js';
 
-getData((picturs) => {
-  addPictures(picturs);
+getData((pictures) => {
+  addPictures(pictures);
 });
 setFormSubmit(hideUploadPicture);
 initRangeSlider();
