@@ -19,7 +19,7 @@ const sendData = (onSuccess, onFail, body) => {
   )
     .then((response) => {
       if (response.ok) {
-        onSuccess();
+        onSuccess('asdasd');
       } else {
         onFail('Не удалось отправить форму. Попробуйте позже.');
       }
