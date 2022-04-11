@@ -1,4 +1,4 @@
-let MAX_COMMENTS_COUNT = 5;
+const MAX_COMMENTS_COUNT = 5;
 
 const bigPicture = document.querySelector('.big-picture');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -35,15 +35,16 @@ const updateModalWindow = (picture) => {
   const loadedComments = picture.comments.slice(0, MAX_COMMENTS_COUNT);
   addComments(loadedComments);
   currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
-  if (picture.comments.length ===  socialCommentsList.childElementCount) {
-    commentsLoader.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+  if (picture.comments.length !==  socialCommentsList.childElementCount) {
+    commentsLoader.classList.remove('hidden');
   }
 
   let count = 5;
   commentsLoader.addEventListener('click', () => {
-    let CommentsPart = picture.comments.slice(count, count + 5);
+    const commentsPart = picture.comments.slice(count, count + 5);
     count += 5;
-    addComments(CommentsPart);
+    addComments(commentsPart);
     currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
     if (picture.comments.length ===  socialCommentsList.childElementCount) {
       commentsLoader.classList.add('hidden');

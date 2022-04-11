@@ -22,7 +22,6 @@ function openModal(picture) {
   commentsCount.textContent = picture.comments.length;
   socialCommentsList.innerHTML = '';
   updateModalWindow(picture);
-  commentsLoader.classList.remove('hidden');
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
