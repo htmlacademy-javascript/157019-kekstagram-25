@@ -7,7 +7,7 @@ const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
 const socialCommentsList = bigPicture.querySelector('.social__comments');
-const commentsLoader = document.querySelector('.social__comments-loader');
+
 
 const onModalEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
