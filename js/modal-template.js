@@ -9,7 +9,8 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 const commentsLoader = document.querySelector('.social__comments-loader');
 const currentCommentsCount = document.querySelector('.current-comments-count');
 
-const updateComments = (comment) => {
+
+const renderComment = (comment) => {
   const {avatar, name, message} = comment;
 
   const commentNode = commentTemplate.cloneNode(true);
@@ -22,20 +23,23 @@ const updateComments = (comment) => {
 const addComments = (comments) => {
   const fragment = document.createDocumentFragment();
   comments.forEach((comment) => {
-    fragment.appendChild(updateComments(comment));
+    fragment.appendChild(renderComment(comment));
   });
   socialCommentsList.appendChild(fragment);
 };
 
 const updateModalWindow = (picture) => {
+
   socialCaption.textContent = picture.description;
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
   commentsCount.textContent = picture.comments.length;
   const loadedComments = picture.comments.slice(0, MAX_COMMENTS_COUNT);
   addComments(loadedComments);
+
   currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
   commentsLoader.classList.add('hidden');
+
   if (picture.comments.length !==  socialCommentsList.childElementCount) {
     commentsLoader.classList.remove('hidden');
   }
@@ -50,6 +54,7 @@ const updateModalWindow = (picture) => {
       commentsLoader.classList.add('hidden');
     }
   });
+
 };
 
 export {updateModalWindow};
