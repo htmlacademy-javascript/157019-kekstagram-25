@@ -3,10 +3,13 @@ const ApiUrl = {
   POST: 'https://25.javascript.pages.academy/kekstagram',
 };
 
-const getData = (onSuccess) => {
+const getData = (onSuccess, onFail) => {
   fetch (ApiUrl.GET)
     .then((response) => response.json())
-    .then(onSuccess);
+    .then(onSuccess)
+    .catch(() => {
+      onFail('Не удалось загрузить данные форму. Попробуйте позже.');
+    });
 };
 
 const sendData = (onSuccess, onFail, body) => {

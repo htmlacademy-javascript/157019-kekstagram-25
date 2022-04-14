@@ -9,22 +9,20 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 const commentsLoader = document.querySelector('.social__comments-loader');
 const currentCommentsCount = document.querySelector('.current-comments-count');
 
-
-
 const renderComment = (comment) => {
   const {avatar, name, message} = comment;
 
-  const commentNode = commentTemplate.cloneNode(true);
-  commentNode.querySelector('.social__picture').src = avatar;
-  commentNode.querySelector('.social__picture').alt = name;
-  commentNode.querySelector('.social__text').textContent = message;
+  const pattern = commentTemplate.cloneNode(true);
+  pattern.querySelector('.social__picture').src = avatar;
+  pattern.querySelector('.social__picture').alt = name;
+  pattern.querySelector('.social__text').textContent = message;
 
-  return commentNode;
+  return pattern;
 };
 
-const addComments = (commentsList) => {
+const addComments = (comments) => {
   const fragment = document.createDocumentFragment();
-  commentsList.forEach((comment) => {
+  comments.forEach((comment) => {
     fragment.appendChild(renderComment(comment));
   });
 
@@ -32,41 +30,39 @@ const addComments = (commentsList) => {
 };
 
 let count = 0;
-let comments = [];
+let  pictureComments = [];
 
-const onCommentLoaderClick = () => {
-  const nextComments = comments.slice(count, count + MAX_COMMENTS_COUNT);
+const onCommentsLoaderClick = () => {
+  const nextComments = pictureComments.slice(count, count + MAX_COMMENTS_COUNT);
   addComments(nextComments);
 
   count += nextComments.length;
   currentCommentsCount.textContent = count;
 
-  if (count >= comments.length) {
+  if (count >= pictureComments.length) {
     commentsLoader.classList.add('hidden');
   }
 };
 
 const updateModalWindow = (picture) => {
-  comments = picture.comments;
-  count = Math.min(comments.length, MAX_COMMENTS_COUNT);
+  pictureComments = picture.comments;
+  count = Math.min(pictureComments.length, MAX_COMMENTS_COUNT);
 
   socialCaption.textContent = picture.description;
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
-  commentsCount.textContent = comments.length;
+  commentsCount.textContent = pictureComments.length;
   currentCommentsCount.textContent = count;
 
-  addComments(comments.slice(0, count));
+  addComments(pictureComments.slice(0, count));
 
-  if (comments.length <= currentCommentsCount.textContent) {
+  if (pictureComments.length <= +currentCommentsCount.textContent) {
     commentsLoader.classList.add('hidden');
   } else {
     commentsLoader.classList.remove('hidden');
   }
 
-  commentsLoader.addEventListener('click', onCommentLoaderClick);
+  commentsLoader.addEventListener('click', onCommentsLoaderClick);
 };
 
 export {updateModalWindow};
-
-

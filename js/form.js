@@ -1,5 +1,4 @@
 import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './validators.js';
-import { showAlert } from './util.js';
 import { sendData } from './api.js';
 
 const form = document.querySelector('.img-upload__form');
@@ -17,16 +16,17 @@ pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 х
 pristine.addValidator(textHashtags, validateUniqueHashtags, 'Все хештеги должны быть разными', 1, true);
 pristine.addValidator(textHashtags, validateSymbolsHashtags, 'После # используй буквы и цифры', 1, true);
 
-const setFormSubmit = (onSuccess) => {
+const setFormSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
+
     const value = textHashtags.value.trim();
-    const isValid = pristine.validate();
-    if (value === '' || isValid) {
-      pristine.validate();
+
+    if (value === '' || pristine.validate()) {
+
       sendData(
         onSuccess,
-        showAlert,
+        onFail,
         new FormData(evt.target),
       );}
   });
