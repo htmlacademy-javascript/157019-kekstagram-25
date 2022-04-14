@@ -10,6 +10,7 @@ const commentsLoader = document.querySelector('.social__comments-loader');
 const currentCommentsCount = document.querySelector('.current-comments-count');
 
 
+
 const renderComment = (comment) => {
   const {avatar, name, message} = comment;
 
@@ -57,10 +58,10 @@ const updateModalWindow = (picture) => {
 
   addComments(comments.slice(0, count));
 
-  if (comments.length >= count) {
-    commentsLoader.classList.remove('hidden');
-  } else {
+  if (comments.length <= currentCommentsCount.textContent) {
     commentsLoader.classList.add('hidden');
+  } else {
+    commentsLoader.classList.remove('hidden');
   }
 
   commentsLoader.addEventListener('click', onCommentLoaderClick);
