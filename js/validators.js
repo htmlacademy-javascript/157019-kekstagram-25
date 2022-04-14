@@ -1,4 +1,4 @@
-import { checkDuplicate } from './util.js';
+import { checkDuplicate } from './util/common.js';
 
 const HASHTAG_MAX_COUNT = 5;
 

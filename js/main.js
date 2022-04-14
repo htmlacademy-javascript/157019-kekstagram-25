@@ -1,7 +1,8 @@
 import {setFormSubmit} from './form.js';
 import {initRangeSlider} from './effects.js';
 import './scale.js';
-import { showAlert, showMessage } from './util.js';
+import { showAlert } from './util/common.js';
+import { showMessage } from './util/message.js';
 import './modal.js';
 import {hideUploadPicture} from './open-upload.js';
 import {getData} from './api.js';
@@ -24,25 +25,12 @@ getData((data) => {
   showFilters();
 
   setFilterChange((filterId) => {
-    // console.log(filterId);
+
     const filteredPictures = filterIdToFilter[filterId](pictures);
 
     removePictures();
     addPictures(filteredPictures);
 
-    /*
-    switch(filterId) {
-      case 'filter-default':
-        addPictures(pictures);
-        break;
-      case 'filter-random':
-        addPictures(getShuffledPhotos(pictures));
-        break;
-      case 'filter-discussed':
-        addPictures(getDiscussedPhotos(pictures));
-        break;
-    }
-**/
   });
 }, (errorMesage) => {
   showAlert(errorMesage);

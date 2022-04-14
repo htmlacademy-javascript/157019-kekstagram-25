@@ -1,4 +1,5 @@
 import { openModal } from './modal.js';
+import { removeElement } from './util/dom.js';
 
 const picturesList = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -6,15 +7,15 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 const renderPicture = (picture) => {
   const {url, likes, comments} = picture;
 
-  const pictureNode = pictureTemplate.cloneNode(true);
-  pictureNode.querySelector('.picture__img').src = url;
-  pictureNode.querySelector('.picture__likes').textContent = likes;
-  pictureNode.querySelector('.picture__comments').textContent = comments.length;
+  const pattern = pictureTemplate.cloneNode(true);
+  pattern.querySelector('.picture__img').src = url;
+  pattern.querySelector('.picture__likes').textContent = likes;
+  pattern.querySelector('.picture__comments').textContent = comments.length;
 
-  pictureNode.addEventListener('click', () => {
+  pattern.addEventListener('click', () => {
     openModal(picture);
   });
-  return pictureNode;
+  return pattern;
 };
 
 const addPictures = (pictures) => {
@@ -24,11 +25,6 @@ const addPictures = (pictures) => {
   });
 
   picturesList.appendChild(fragment);
-};
-
-// -> util/dom.js
-const removeElement = (element) => {
-  element.remove();
 };
 
 const removePictures = () => {
