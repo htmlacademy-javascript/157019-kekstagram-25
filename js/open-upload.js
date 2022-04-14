@@ -1,6 +1,7 @@
 import { isEscapeKey } from './util.js';
 import { changeImageScale, ScaleValue } from './scale.js';
 import { clearEffect } from './effects.js';
+import { resetValidators } from './form.js';
 
 const uploadForm = document.querySelector('.img-upload__form');
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -23,6 +24,7 @@ const hideUploadPicture = () => {
   changeImageScale(ScaleValue.MAX);
   removeEscKeydownHandler();
   clearEffect();
+  resetValidators();
 };
 
 const showUploadPicture = () => {
@@ -63,3 +65,5 @@ imageUploadTextTextarea.addEventListener('focusout', () => {
 uploadFile.addEventListener('change', onUploadFileChange);
 
 uploadCancel.addEventListener('click', onUploadCancelClick);
+
+export {hideUploadPicture};

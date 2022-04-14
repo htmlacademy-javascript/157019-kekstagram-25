@@ -6,9 +6,8 @@ const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
 const commentsCount = bigPicture.querySelector('.comments-count');
 const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
-const socialCommentCount = bigPicture.querySelector('.social__comment-count');
-const commentsLoader = bigPicture.querySelector('.comments-loader');
 const socialCommentsList = bigPicture.querySelector('.social__comments');
+
 
 const onModalEscKeydown = (evt) => {
   if(isEscapeKey(evt)){
@@ -23,9 +22,6 @@ function openModal(picture) {
   commentsCount.textContent = picture.comments.length;
   socialCommentsList.innerHTML = '';
   updateModalWindow(picture);
-
-  socialCommentCount.classList.add('hidden');
-  commentsLoader.classList.add('hidden');
   bigPicture.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown', onModalEscKeydown);
