@@ -26,4 +26,13 @@ const addPictures = (pictures) => {
   picturesList.appendChild(fragment);
 };
 
-export {addPictures};
+// -> util/dom.js
+const removeElement = (element) => {
+  element.remove();
+};
+
+const removePictures = () => {
+  picturesList.querySelectorAll('.picture').forEach(removeElement);
+};
+
+export {addPictures, removePictures};
