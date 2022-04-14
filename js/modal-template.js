@@ -9,7 +9,6 @@ const commentTemplate = document.querySelector('#comment').content.querySelector
 const commentsLoader = document.querySelector('.social__comments-loader');
 const currentCommentsCount = document.querySelector('.current-comments-count');
 
-
 const renderComment = (comment) => {
   const {avatar, name, message} = comment;
 
@@ -67,5 +66,3 @@ const updateModalWindow = (picture) => {
 };
 
 export {updateModalWindow};
-
-

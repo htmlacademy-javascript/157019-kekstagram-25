@@ -58,5 +58,3 @@ setFormSubmit(
   });
 
 initRangeSlider();
-
-
