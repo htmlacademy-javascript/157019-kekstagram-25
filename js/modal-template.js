@@ -17,44 +17,53 @@ const renderComment = (comment) => {
   commentNode.querySelector('.social__picture').src = avatar;
   commentNode.querySelector('.social__picture').alt = name;
   commentNode.querySelector('.social__text').textContent = message;
+
   return commentNode;
 };
 
-const addComments = (comments) => {
+const addComments = (commentsList) => {
   const fragment = document.createDocumentFragment();
-  comments.forEach((comment) => {
+  commentsList.forEach((comment) => {
     fragment.appendChild(renderComment(comment));
   });
+
   socialCommentsList.appendChild(fragment);
 };
 
+let count = 0;
+let comments = [];
+
+const onCommentLoaderClick = () => {
+  const nextComments = comments.slice(count, count + MAX_COMMENTS_COUNT);
+  addComments(nextComments);
+
+  count += nextComments.length;
+  currentCommentsCount.textContent = count;
+
+  if (count >= comments.length) {
+    commentsLoader.classList.add('hidden');
+  }
+};
+
 const updateModalWindow = (picture) => {
+  comments = picture.comments;
+  count = Math.min(comments.length, MAX_COMMENTS_COUNT);
 
   socialCaption.textContent = picture.description;
   bigPicture.src = picture.url;
   likesCount.textContent = picture.likes;
-  commentsCount.textContent = picture.comments.length;
-  const loadedComments = picture.comments.slice(0, MAX_COMMENTS_COUNT);
-  addComments(loadedComments);
+  commentsCount.textContent = comments.length;
+  currentCommentsCount.textContent = count;
 
-  currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
-  commentsLoader.classList.add('hidden');
+  addComments(comments.slice(0, count));
 
-  if (picture.comments.length !==  socialCommentsList.childElementCount) {
+  if (comments.length >= count) {
     commentsLoader.classList.remove('hidden');
+  } else {
+    commentsLoader.classList.add('hidden');
   }
 
-  let count = 5;
-  commentsLoader.addEventListener('click', () => {
-    const commentsPart = picture.comments.slice(count, count + 5);
-    count += 5;
-    addComments(commentsPart);
-    currentCommentsCount.innerHTML = socialCommentsList.childElementCount.toString();
-    if (picture.comments.length ===  socialCommentsList.childElementCount) {
-      commentsLoader.classList.add('hidden');
-    }
-  });
-
+  commentsLoader.addEventListener('click', onCommentLoaderClick);
 };
 
 export {updateModalWindow};
