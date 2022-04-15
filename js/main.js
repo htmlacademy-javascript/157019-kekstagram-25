@@ -4,6 +4,7 @@ import './scale.js';
 import { showAlert } from './util/common.js';
 import { showMessage } from './util/message.js';
 import './modal.js';
+import './preview.js';
 import {hideUploadPicture} from './open-upload.js';
 import {getData} from './api.js';
 import {addPictures, removePictures } from './pictures.js';

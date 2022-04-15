@@ -9,6 +9,8 @@ const uploadFile = document.querySelector('#upload-file');
 const uploadCancel = document.querySelector('#upload-cancel');
 const imageUploadTextInput = document.querySelector('.img-upload__text input');
 const imageUploadTextTextarea = document.querySelector('.img-upload__text textarea');
+const preview = document.querySelector('.img-upload__preview img');
+
 const addEscKeydownHandler = () => {
   document.addEventListener('keydown', onEscKeydown);
 };
@@ -21,6 +23,7 @@ const hideUploadPicture = () => {
   uploadForm.reset();
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
+  preview.src = '';
   changeImageScale(ScaleValue.MAX);
   removeEscKeydownHandler();
   clearEffect();

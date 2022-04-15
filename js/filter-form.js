@@ -1,4 +1,4 @@
-import { debounce } from './util/debounce.js';
+import {debounce} from './util/debounce.js';
 
 const imageFilters = document.querySelector('.img-filters');
 const filterButtons = document.querySelectorAll('.img-filters__form button');
@@ -17,11 +17,11 @@ const onButtonClick = (evt) => {
 };
 
 filterButtons.forEach((button) => {
-  button.addEventListener('click', debounce(onButtonClick));
+  button.addEventListener('click', onButtonClick);
 });
 
 const setFilterChange = (callback) => {
-  filterChangeCallback = callback;
+  filterChangeCallback = debounce(callback);
 };
 
 const showFilters = () => {

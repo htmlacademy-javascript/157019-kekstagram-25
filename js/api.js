@@ -8,7 +8,7 @@ const getData = (onSuccess, onFail) => {
     .then((response) => response.json())
     .then(onSuccess)
     .catch(() => {
-      onFail('Не удалось загрузить данные форму. Попробуйте позже.');
+      onFail('Не удалось загрузить данные.');
     });
 };
 
