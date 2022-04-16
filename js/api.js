@@ -12,7 +12,7 @@ const getData = (onSuccess, onFail) => {
     });
 };
 
-const sendData = (onSuccess, onFail, body) => {
+const sendData = (body, onSuccess, onFail, onResult) => {
   fetch (
     ApiUrl.POST,
     {
@@ -21,6 +21,7 @@ const sendData = (onSuccess, onFail, body) => {
     },
   )
     .then((response) => {
+
       if (response.ok) {
         onSuccess();
       } else {
@@ -29,7 +30,8 @@ const sendData = (onSuccess, onFail, body) => {
     })
     .catch(() => {
       onFail('Не удалось отправить форму. Попробуйте позже.');
-    });
+    })
+    .finally(onResult);
 };
 
 export {getData, sendData};

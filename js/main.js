@@ -1,4 +1,4 @@
-import {setFormSubmit} from './form.js';
+import {addFormSubmit} from './form.js';
 import {initRangeSlider} from './effects.js';
 import './scale.js';
 import { showAlert } from './util/common.js';
@@ -37,13 +37,15 @@ getData((data) => {
   showAlert(errorMesage);
 });
 
-setFormSubmit(
+addFormSubmit(
   () => {
-    hideUploadPicture();
     showMessage('success');
   }, () => {
-    hideUploadPicture();
     showMessage('error');
-  });
+  },
+  () => {
+    hideUploadPicture();
+  }
+);
 
 initRangeSlider();

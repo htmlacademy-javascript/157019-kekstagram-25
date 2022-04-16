@@ -1,8 +1,14 @@
-import { validateUniqueHashtags, validateSymbolsHashtags, validateTextHashtagsEmpty, validateCountHashtags, validateSpace } from './validators.js';
 import { sendData } from './api.js';
+import {
+  validateUniqueHashtags,
+  validateSymbolsHashtags,
+  validateCountHashtags,
+  validateHashtagsByLength,
+} from './validators.js';
 
 const form = document.querySelector('.img-upload__form');
-const textHashtags = document.querySelector('.text__hashtags');
+const submitButton = form.querySelector('#upload-submit');
+const textHashtags = form.querySelector('.text__hashtags');
 
 const pristine = new window.Pristine(form, {
   classTo: 'text-info',
@@ -10,25 +16,29 @@ const pristine = new window.Pristine(form, {
   errorTextClass: 'error__hash-tag',
 });
 
-pristine.addValidator(textHashtags, validateTextHashtagsEmpty, '', 1, true);
-pristine.addValidator(textHashtags, validateSpace, 'Забыл о пробелах', 1, true);
-pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 хештегов', 1, true);
-pristine.addValidator(textHashtags, validateUniqueHashtags, 'Все хештеги должны быть разными', 1, true);
+pristine.addValidator(textHashtags, validateCountHashtags, 'Не более 5 хэш-тегов', 1, true);
+pristine.addValidator(textHashtags, validateHashtagsByLength, 'Максимальная длина хэш-тега 20 символов, включая решётку', 1, true);
 pristine.addValidator(textHashtags, validateSymbolsHashtags, 'После # используй буквы и цифры', 1, true);
+pristine.addValidator(textHashtags, validateUniqueHashtags, 'Все хэш-теги должны быть разными', 1, true);
 
-const setFormSubmit = (onSuccess, onFail) => {
+const addFormSubmit = (onSuccess, onFail, onResult) => {
   form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     const value = textHashtags.value.trim();
 
     if (value === '' || pristine.validate()) {
-
+      submitButton.disabled = true;
       sendData(
+        new FormData(evt.target),
         onSuccess,
         onFail,
-        new FormData(evt.target),
-      );}
+        () => {
+          submitButton.disabled = false;
+          onResult();
+        },
+      );
+    }
   });
 };
 
@@ -36,4 +46,4 @@ const resetValidators = () => {
   pristine.reset();
 };
 
-export {setFormSubmit, resetValidators};
+export {addFormSubmit, resetValidators};
