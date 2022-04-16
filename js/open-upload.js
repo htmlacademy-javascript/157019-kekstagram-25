@@ -19,18 +19,24 @@ const removeEscKeydownHandler = () => {
   document.removeEventListener('keydown', onEscKeydown);
 };
 
-const hideUploadPicture = () => {
+const resetUploadPicture = () => {
   uploadForm.reset();
-  imageUploadOverlay.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  preview.src = '';
+
   changeImageScale(ScaleValue.MAX);
-  removeEscKeydownHandler();
   clearEffect();
   resetValidators();
 };
 
+const hideUploadPicture = () => {
+  resetUploadPicture();
+  preview.src = '';
+  imageUploadOverlay.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  removeEscKeydownHandler();
+};
+
 const showUploadPicture = () => {
+  resetUploadPicture();
   imageUploadOverlay.classList.remove('hidden');
   document.body.classList.add('modal-open');
   addEscKeydownHandler();

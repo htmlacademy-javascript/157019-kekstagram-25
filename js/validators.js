@@ -1,34 +1,39 @@
 import { checkDuplicate } from './util/common.js';
 
 const HASHTAG_MAX_COUNT = 5;
+const HASHTAG_MAX_LENGTH = 20;
 
-const textHashtags = document.querySelector('.text__hashtags');
-const reSpace = /\b#[A-Za-zА-Яа-яЁё0-9]/;
-const hashtagSymbolRegexp = /^#[A-Za-zА-Яа-яЁё0-9]{1,20}$/;
-const getHashTagsFromInput = () => textHashtags.value.trim().toLowerCase().split(' ');
+const hashtagSymbolRegexp = /^#[A-Za-zА-Яа-яЁё0-9]+$/;
 
-const validateTextHashtagsEmpty = () => {
-  const value = textHashtags.value.trim();
-  return value !== '';
+const parseHashtagInput = (value) => value.trim().toLowerCase().split(' ');
+
+const checkHashtagsLength = (hashtags) => hashtags.every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
+
+const validateHashtagsByLength = (value) => {
+  const hashtags = parseHashtagInput(value);
+  return checkHashtagsLength(hashtags);
 };
 
 const validateHashtagsByMask = (hashtags) => hashtags.every((hashtag) => hashtagSymbolRegexp.test(hashtag));
 
-const validateUniqueHashtags = () => {
-  const hashtags = getHashTagsFromInput();
+const validateUniqueHashtags = (value) => {
+  const hashtags = parseHashtagInput(value);
   return ! checkDuplicate(hashtags);
 };
 
-const validateSymbolsHashtags = () => {
-  const hashtags = getHashTagsFromInput();
+const validateSymbolsHashtags = (value) => {
+  const hashtags = parseHashtagInput(value);
   return validateHashtagsByMask(hashtags);
 };
 
-const validateCountHashtags = () => {
-  const hashtags = getHashTagsFromInput();
+const validateCountHashtags = (value) => {
+  const hashtags = parseHashtagInput(value);
   return hashtags.length <= HASHTAG_MAX_COUNT;
 };
 
-const validateSpace = () => ! reSpace.test(textHashtags.value);
-
-export{ validateTextHashtagsEmpty, validateUniqueHashtags, validateSymbolsHashtags, validateCountHashtags, validateSpace };
+export {
+  validateUniqueHashtags,
+  validateSymbolsHashtags,
+  validateCountHashtags,
+  validateHashtagsByLength
+};

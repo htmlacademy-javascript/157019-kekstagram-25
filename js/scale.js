@@ -4,7 +4,7 @@ const ScaleValue = {
   STEP: 25,
 };
 
-const previewImage = document.querySelector('.img-upload__preview');
+const preview = document.querySelector('.img-upload__preview img');
 const smallerScale = document.querySelector('.scale__control--smaller');
 const biggerScale = document.querySelector('.scale__control--bigger');
 const scaleControl = document.querySelector('.scale__control--value');
@@ -14,7 +14,7 @@ let currentScale = ScaleValue.MAX;
 const changeImageScale = (value) => {
   currentScale = value;
   scaleControl.value = `${value}%`;
-  previewImage.style.transform = `scale(${value / 100})`;
+  preview.style.transform = `scale(${value / 100})`;
 };
 
 smallerScale.addEventListener('click', () => {

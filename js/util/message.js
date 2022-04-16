@@ -7,12 +7,12 @@ const showMessage = (type) => {
   const template = type === 'success' ? successMessageTemplate : errorMessageTemplate;
 
   const message = template.cloneNode(true);
-  const title = message.querySelector(`.${type}__title`);
-
-  document.body.append(message);
+  const messageBlock = message.querySelector(`.${type}__inner`);
+  const messageTitle = message.querySelector(`.${type}__title`);
 
   const remove = () => {
     message.remove();
+    document.removeEventListener('click', onClick);
     document.removeEventListener('keydown', onEscapeKeydown);
   };
 
@@ -24,15 +24,20 @@ const showMessage = (type) => {
     }
   }
 
-  message.addEventListener('click', (evt) => {
-    if (title === evt.target){
-      evt.preventDefault();
+  function onClick(evt) {
+    evt.preventDefault();
+
+    if (messageBlock === evt.target || messageTitle === evt.target) {
+
       return;
     }
 
     remove();
-  });
+  }
 
+  document.body.append(message);
+
+  document.addEventListener('click', onClick);
   document.addEventListener('keydown', onEscapeKeydown);
 };
 

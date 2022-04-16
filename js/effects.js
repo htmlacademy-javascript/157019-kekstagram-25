@@ -71,15 +71,22 @@ const effectsList = document.querySelector('.effects__list');
 const image = document.querySelector('.img-upload__preview img');
 const effectSlider = document.querySelector('.effect-level__slider');
 const effectLevel = document.querySelector('.effect-level__value');
-let effect = DEFAULT_EFFECT;
-
 const uploadEffectLevel = document.querySelector('.img-upload__effect-level');
 
+let currentEffect = DEFAULT_EFFECT;
+
 const clearEffect = () => {
-  image.className = 'effects effects__preview--none';
-  effectSlider.setAttribute('disabled', true);
-  uploadEffectLevel.classList.add('hidden');
   image.style.filter = '';
+  image.classList.remove(`effects__preview--${currentEffect}`);
+
+  uploadEffectLevel.classList.add('hidden');
+};
+
+const renderFilter = () => {
+  const volume = effectSlider.noUiSlider.get(true);
+
+  effectLevel.value = volume;
+  image.style.filter = `${stylesMap[currentEffect]}(${volume}${signsMap[currentEffect]})`;
 };
 
 const initRangeSlider = () => {
@@ -88,29 +95,31 @@ const initRangeSlider = () => {
       min: 0,
       max: 1,
     },
-    start: 0,
+    start: 1,
     step: 0.1
   });
 
   effectSlider.noUiSlider.on('update', () => {
-    effectLevel.value = effectSlider.noUiSlider.get();
-    image.style.filter = `${stylesMap[effect]}(${effectLevel.value}${signsMap[effect]})`;
-    uploadEffectLevel.classList.remove('hidden');
-    if (effect === DEFAULT_EFFECT) {
-      uploadEffectLevel.classList.add('hidden');
-      effectSlider.setAttribute('disabled', true);
-    }
+    renderFilter();
   });
+
   effectsList.addEventListener('change', (evt) => {
-    effect = evt.target.value;
-    image.className = `effects effects__preview--${effect}`;
-    effectSlider.noUiSlider.updateOptions(settingsMap[effect]);
-    effectSlider.removeAttribute('disabled');
+    const effect = evt.target.value;
+
+    image.classList.remove(`effects__preview--${currentEffect}`);
+    image.classList.add(`effects__preview--${effect}`);
+
+    currentEffect = effect;
+
     if (effect === DEFAULT_EFFECT) {
       clearEffect();
+    } else {
+      uploadEffectLevel.classList.remove('hidden');
+
+      effectSlider.noUiSlider.updateOptions(settingsMap[currentEffect]);
+      renderFilter();
     }
   });
 };
 
 export {clearEffect, initRangeSlider};
-
