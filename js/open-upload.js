@@ -20,16 +20,18 @@ const removeEscKeydownHandler = () => {
 };
 
 const resetUploadPicture = () => {
-  uploadForm.reset();
-
   changeImageScale(ScaleValue.MAX);
   clearEffect();
   resetValidators();
 };
 
+
 const hideUploadPicture = () => {
-  resetUploadPicture();
+  uploadForm.reset();
+  URL.revokeObjectURL(preview.src);
   preview.src = '';
+  resetUploadPicture();
+
   imageUploadOverlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   removeEscKeydownHandler();

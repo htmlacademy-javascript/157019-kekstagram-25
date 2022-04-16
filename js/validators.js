@@ -9,6 +9,7 @@ const parseHashtagInput = (value) => value.trim().toLowerCase().split(' ');
 
 const checkHashtagsLength = (hashtags) => hashtags.every((hashtag) => hashtag.length <= HASHTAG_MAX_LENGTH);
 
+
 const validateHashtagsByLength = (value) => {
   const hashtags = parseHashtagInput(value);
   return checkHashtagsLength(hashtags);
@@ -21,10 +22,7 @@ const validateUniqueHashtags = (value) => {
   return ! checkDuplicate(hashtags);
 };
 
-const validateSymbolsHashtags = (value) => {
-  const hashtags = parseHashtagInput(value);
-  return validateHashtagsByMask(hashtags);
-};
+const validateSymbolsHashtags = (value) => value === '' || validateHashtagsByMask(parseHashtagInput(value));
 
 const validateCountHashtags = (value) => {
   const hashtags = parseHashtagInput(value);
